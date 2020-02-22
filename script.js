@@ -1,3 +1,17 @@
+// REGULAR JAVASCRIPT STUFF
+
+
+
+
+
+
+
+
+
+
+
+//  SERVER STUFF
+
 // Depedencies 
 const express = require('express');
 const path = require('path');
