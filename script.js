@@ -1,8 +1,6 @@
 // Depedencies 
 const express = require('express');
 const path = require('path');
-const WaitList = require('./classes/waitList');
-const Reservation = require('./classes/reservations');
 
 // Set up the express app
 const app = express();
@@ -13,27 +11,8 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // Variables 
-
-let reservations = [
-    {
-        routeName: "bob-1",
-        patronName: "Bob",
-        tableNumber: "1",
-    },
-    {
-        routeName: "karen-2",
-        patronName: "Karen",
-        tableNumber: "2",
-    }
-]
-
-let waitList = [
-    {
-        routeName: "susan-w",
-        patronName: "Susan",
-        tableNumber: "n/a"
-    }
-]
+let reservations = [];
+let waitList = [];
 
 // Routes
 
@@ -62,10 +41,6 @@ app.get("/api/reservations/:reservation", (req, res) => {
       }
     }
     return res.json(false);
-});
-
-app.get("/api/waitlist", (req, res) => {
-    
 });
 
 app.get("/api/waitlist", (req, res) => {
