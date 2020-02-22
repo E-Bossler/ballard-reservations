@@ -1,3 +1,17 @@
+// REGULAR JAVASCRIPT STUFF
+
+
+
+
+
+
+
+
+
+
+
+//  SERVER STUFF
+
 // Depedencies 
 
 const express = require('express');
@@ -19,11 +33,15 @@ let reservations = [
     {
         routeName: "bob-1",
         patronName: "Bob",
+        email: "test@test.com",
+        phoneNumber: "234-234-2343",
         tableNumber: "1",
     },
     {
         routeName: "karen-2",
         patronName: "Karen",
+        email: "test@test.com",
+        phoneNumber: "234-234-2343",
         tableNumber: "2",
     }
 ]
@@ -32,6 +50,8 @@ let waitList = [
     {
         routeName: "susan-w",
         patronName: "Susan",
+        email: "test@test.com",
+        phoneNumber: "234-234-2343",
         tableNumber: "n/a"
     }
 ]
@@ -66,10 +86,6 @@ app.get("/api/reservations/:reservation", (req, res) => {
 });
 
 app.get("/api/waitlist", (req, res) => {
-    
-});
-
-app.get("/api/waitlist", (req, res) => {
     return res.json(waitList);
 });
 
@@ -77,7 +93,7 @@ app.get("/api/waitlist/:waitlistperson", (req, res) => {
     var chosenWaitList = req.params.waitlistperson;
     console.log(chosenWaitList);
     for (var i = 0; i < waitList.length; i++) {
-      if (chosen === waitList[i].routeName) {
+      if (chosenWaitList === waitList[i].routeName) {
         return res.json(waitList[i]);
       }
     }
@@ -88,7 +104,7 @@ app.get("/api/waitlist/:waitlistperson", (req, res) => {
 // if lenght of reservation is greater than 4, 
 // creates wiatlist item
 
-app.post('/api/reservatios', (req,res) => {
+app.post('/api/reservations', (req,res) => {
         // req.body hosts is equal to the JSON post sent from the user
         // This works because of our body parsing middleware
     let newReservation = req.body;
