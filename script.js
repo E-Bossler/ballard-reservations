@@ -1,15 +1,14 @@
 // Depedencies 
-
 const express = require('express');
 const path = require('path');
+const WaitList = require('./classes/waitList');
+const Reservation = require('./classes/reservations');
 
 // Set up the express app
-
 const app = express();
 const port = 9999;
 
 // Middleware
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
@@ -39,15 +38,15 @@ let waitList = [
 // Routes
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(_dirname,'index.html'));
+    res.sendFile(path.join(__dirname,'index.html'));
 });
 
 app.get("/make", (req, res) => {
-    res.sendFile(path.join(_dirname,'make.html'));
+    res.sendFile(path.join(__dirname,'make.html'));
 });
 
 app.get("/view", (req, res) => {
-    res.sendFile(path.join(_dirname,'view.html'));
+    res.sendFile(path.join(__dirname,'view.html'));
 });
 
 app.get("/api/reservations", (req, res) => {
@@ -57,7 +56,7 @@ app.get("/api/reservations", (req, res) => {
 app.get("/api/reservations/:reservation", (req, res) => {
     var chosen = req.params.reservation;
     console.log(chosen);
-    for (var i = 0; i < characters.length; i++) {
+    for (var i = 0; i < reservations.length; i++) {
       if (chosen === reservations[i].routeName) {
         return res.json(reservations[i]);
       }
@@ -77,7 +76,7 @@ app.get("/api/waitlist/:waitlistperson", (req, res) => {
     var chosenWaitList = req.params.waitlistperson;
     console.log(chosenWaitList);
     for (var i = 0; i < waitList.length; i++) {
-      if (chosen === waitList[i].routeName) {
+      if (chosenWaitList === waitList[i].routeName) {
         return res.json(waitList[i]);
       }
     }
@@ -88,7 +87,7 @@ app.get("/api/waitlist/:waitlistperson", (req, res) => {
 // if lenght of reservation is greater than 4, 
 // creates wiatlist item
 
-app.post('/api/reservatios', (req,res) => {
+app.post('/api/reservations', (req,res) => {
         // req.body hosts is equal to the JSON post sent from the user
         // This works because of our body parsing middleware
     let newReservation = req.body;
