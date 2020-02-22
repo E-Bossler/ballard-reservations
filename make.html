@@ -15,7 +15,7 @@
     <div class="jumbotron jumbotron-fluid my-2 p-5">
         <div class="container">
           <h1 class="display-4">Hot Reservation</h1>
-          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          <p class="lead">Enter your information and we'll add you to the waitlist.</p>
         </div>
     </div>
     <div class="container p-2">
@@ -36,9 +36,47 @@
                 <label for="id">Unique Id</label>
                 <input type="text" class="form-control" id="id">
             </div>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button id="make-res" type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
-    
+
+    <!-- <script src="./classes/reservations.js"></script> -->
+    <script>
+        const makeResBtn = document.getElementById('make-res');
+        const nameVal = document.getElementById('name');
+        const phoneVal = document.getElementById('phone-number');
+        const emailVal = document.getElementById('email');
+        const idVal = document.getElementById('id');
+
+        let reservations = [];
+        let waitList = [];
+
+        class Reservation {
+            constructor(name, phone, email, id) {
+                this.name = name;
+                this.phone = phone;
+                this.email = email;
+                this.id = id;
+            }
+        }
+
+        makeResBtn.addEventListener('click', (event) => {
+            console.log('hello');
+            event.preventDefault();
+            let name = nameVal.value.trim();
+            let phone = phoneVal.value.trim();
+            let email = emailVal.value.trim();
+            let id = idVal.value.trim();
+            if (reservations.length < 5) {
+                reservations.push(new Reservation(name, phone, email, id));
+            } else {
+                waitList.push(new Reservation(name, phone, email, id));
+            }
+            console.log(reservations);
+            console.log(waitList);
+        });
+    </script>
+
+    <!-- <script src="script.js"></script> -->
 </body>
 </html>

@@ -13,61 +13,33 @@
 //  SERVER STUFF
 
 // Depedencies 
-
 const express = require('express');
 const path = require('path');
 
 // Set up the express app
-
 const app = express();
 const port = 9999;
 
 // Middleware
-
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 // Variables 
-
-let reservations = [
-    {
-        routeName: "bob-1",
-        patronName: "Bob",
-        email: "test@test.com",
-        phoneNumber: "234-234-2343",
-        tableNumber: "1",
-    },
-    {
-        routeName: "karen-2",
-        patronName: "Karen",
-        email: "test@test.com",
-        phoneNumber: "234-234-2343",
-        tableNumber: "2",
-    }
-]
-
-let waitList = [
-    {
-        routeName: "susan-w",
-        patronName: "Susan",
-        email: "test@test.com",
-        phoneNumber: "234-234-2343",
-        tableNumber: "n/a"
-    }
-]
+let reservations = [];
+let waitList = [];
 
 // Routes
 
 app.get("/", (req, res) => {
-    res.sendFile(path.join(_dirname,'index.html'));
+    res.sendFile(path.join(__dirname,'index.html'));
 });
 
 app.get("/make", (req, res) => {
-    res.sendFile(path.join(_dirname,'make.html'));
+    res.sendFile(path.join(__dirname,'make.html'));
 });
 
 app.get("/view", (req, res) => {
-    res.sendFile(path.join(_dirname,'view.html'));
+    res.sendFile(path.join(__dirname,'view.html'));
 });
 
 app.get("/api/reservations", (req, res) => {
@@ -77,7 +49,7 @@ app.get("/api/reservations", (req, res) => {
 app.get("/api/reservations/:reservation", (req, res) => {
     var chosen = req.params.reservation;
     console.log(chosen);
-    for (var i = 0; i < characters.length; i++) {
+    for (var i = 0; i < reservations.length; i++) {
       if (chosen === reservations[i].routeName) {
         return res.json(reservations[i]);
       }
